@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "433490481470",
+    "project_id": "fooddelivdb",
+    "storage_bucket": "fooddelivdb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433490481470:android:53cea1d0bb251524a9dc6f",
+        "android_client_info": {
+          "package_name": "com.example.foody"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnilB2uJNop6QxAreMD9AZ7kAbq2iTyoM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

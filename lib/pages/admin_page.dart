@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foody/components/client_drinks.dart';
 import 'package:foody/components/client_food.dart';
+import 'package:foody/components/widgets/dialogbox.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({super.key});
@@ -11,6 +12,18 @@ class AdminPage extends StatefulWidget {
 
 class _AdminPageState extends State<AdminPage> {
     String list = "";
+
+    void addNewFood() {
+    
+    showDialog(
+      context: context,
+      builder: (context) {
+        return MyDialogBox(
+        
+        );
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
  return Scaffold(
@@ -23,7 +36,7 @@ class _AdminPageState extends State<AdminPage> {
         padding: const EdgeInsets.all(20.0),
         child: FloatingActionButton(
           backgroundColor: Colors.green,
-          onPressed: (){},child: Icon(Icons.add,color: Colors.white,),),
+          onPressed: addNewFood,child: Icon(Icons.add,color: Colors.white,size: 30,),),
       ),
       body: Column(
         children: [

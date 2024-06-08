@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foody/components/widgets/foodItem.dart';
 
 class ClientFood extends StatefulWidget {
   const ClientFood({super.key});
@@ -11,7 +12,13 @@ class _ClientFoodState extends State<ClientFood> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(child: Text("FOOD"),),
+      child: ListView(children: [FoodItem(), FoodItem(),
+      FoodItem(), FoodItem(),
+      FoodItem(), FoodItem(),
+      FoodItem(), FoodItem(),
+      FoodItem(), FoodItem()
+      
+      ]),
     );
   }
 }

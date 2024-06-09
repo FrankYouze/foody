@@ -96,7 +96,7 @@ class MyDialogBox extends StatelessWidget {
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white)),
                 border: OutlineInputBorder(),
-                hintText: "Add food/drink price",
+                hintText: "Add food/drink price (1000 /=)",
               ),
             ),
             const SizedBox(
@@ -107,6 +107,7 @@ class MyDialogBox extends StatelessWidget {
               children: [
                 MaterialButton(
                   onPressed: () async {
+                    if (FoodNameCon.text == "" || FoodPriceCon.text == "" ) return;
                     try {
                       await foodDB.child(FoodNameCon.text).set({
                         "FoodPrice": FoodPriceCon.text,
@@ -118,6 +119,9 @@ class MyDialogBox extends StatelessWidget {
 
                     FoodPriceCon.clear();
                     FoodNameCon.clear();
+                    
+
+              
                   },
                   color: Colors.green,
                   child: const Text(
@@ -127,6 +131,7 @@ class MyDialogBox extends StatelessWidget {
                 ),
                 MaterialButton(
                   onPressed: () async {
+                      if (FoodNameCon.text == "" || FoodPriceCon.text == "" ) return;
                     try {
                       await drinksDB.child(FoodNameCon.text).set({
                         "FoodPrice": FoodPriceCon.text,

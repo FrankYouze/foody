@@ -14,7 +14,7 @@ class _CartPageState extends State<CartPage> {
       backgroundColor: Colors.green[100],
       appBar: AppBar(backgroundColor: Colors.green,title: Text("MyCart",style: TextStyle(color: Colors.white),), centerTitle: true,),
 
-      body: ListView(),
+      body: ListView(children: [Center(child:Text("CLIENT CART"))],),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foody/components/client_drinks.dart';
 import 'package:foody/components/client_food.dart';
 import 'package:foody/components/widgets/dialogbox.dart';
+import 'package:foody/pages/Pass_conPage.dart';
 
 class AdminPage extends StatefulWidget {
   final String User;
@@ -46,7 +47,12 @@ class _AdminPageState extends State<AdminPage> {
       backgroundColor: Colors.green[100],
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text("CafeApp"),
+        title: Text("CafeApp",style: TextStyle(color: Colors.white),),
+        actions: [IconButton(onPressed: (){
+Navigator.push(context, MaterialPageRoute(builder: (context)=> PassConpage()));
+
+        }, icon: Icon(Icons.admin_panel_settings,size: 30,))],
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -91,7 +97,7 @@ class _AdminPageState extends State<AdminPage> {
           Expanded(
               child: Container(
             color: Colors.white,
-            child: list == "FOOD"? ClientFood(user: _userGroup,) : ClientDrinks(User: _userGroup)
+            child: list == "DRINKS"? ClientDrinks(User: _userGroup) : ClientFood(user: _userGroup,)
             ),
           )
         ],

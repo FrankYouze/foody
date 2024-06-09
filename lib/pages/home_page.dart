@@ -14,24 +14,34 @@ backgroundColor: Colors.green[100],
 appBar: AppBar(title: Text("CafeApp",style: TextStyle(color: Colors.white),),backgroundColor: Colors.green,),
 
 
-body: Center(child: Container(height: 300,child: Column(children: [
-ElevatedButton(
-  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Colors.green)),
-  onPressed: (){
-
-    Navigator.push(context, MaterialPageRoute(builder: (context)=> ClientPage()));
-  }, child: Text("Client")),  SizedBox(height: 20,),
-ElevatedButton(
-  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Colors.green)),
-  onPressed: (){
-Navigator.push(context, MaterialPageRoute(builder: (context)=> AuthPage()));
-
-  }, child: Text("Admin")),
-
+body: Stack(
+  children :[ 
+    Center(
+      child: Container(
+        width: double.infinity,
+        height: 600,
+        child: Image(image: AssetImage("assets/zege.jpeg"),fit: BoxFit.cover,),),
+    ),
+    
+    Center(child: Container(height: 300,child: Column(children: [
+  ElevatedButton(
+    style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Colors.green)),
+    onPressed: (){
   
-
-
-],),),),
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> ClientPage()));
+    }, child: Text("Client")),  SizedBox(height: 20,),
+  ElevatedButton(
+    style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Colors.green)),
+    onPressed: (){
+  Navigator.push(context, MaterialPageRoute(builder: (context)=> AuthPage()));
+  
+    }, child: Text("Admin")),
+  
+    
+  
+  
+  ],),),),]
+),
 
 
     );

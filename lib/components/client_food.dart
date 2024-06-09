@@ -32,7 +32,7 @@ class _ClientFoodState extends State<ClientFood> {
         availableFoods = Map<String, dynamic>.from(
             event.snapshot.value as Map<dynamic, dynamic>);
        // print(availableFoods.keys);
-       
+       userGroup = widget.user;
    // print(availableFoods[current]["FoodImage"]);     
       });
     });

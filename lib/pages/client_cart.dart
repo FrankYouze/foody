@@ -12,9 +12,9 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green[100],
-      appBar: AppBar(backgroundColor: Colors.green,title: Text("CafeApp"),),
+      appBar: AppBar(backgroundColor: Colors.green,title: Text("MyCart",style: TextStyle(color: Colors.white),), centerTitle: true,),
 
-      body: Column(),
+      body: ListView(),
     );
   }
 }

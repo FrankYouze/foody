@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:foody/pages/admin_page.dart';
 
 class FoodItem extends StatelessWidget {
-  const FoodItem({super.key});
+  final String ImageUrl;
+  final String foodName;
+  final String price;
+  final String userGroup;
+   FoodItem({super.key, required this.ImageUrl, required this.foodName, required this.price, required this.userGroup});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +26,8 @@ class FoodItem extends StatelessWidget {
           Container(width: 130,
           height: 110,
           color: Colors.white,
+          child: Image.network(ImageUrl,fit: BoxFit.cover,),
+       
           ),
           SizedBox(width: 10,),
           Expanded(
@@ -29,13 +35,15 @@ class FoodItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("SOMETHING BIG GOES HERE",style: TextStyle(fontSize: 20),),
+                Text(foodName,style: TextStyle(fontSize: 20),),
                 SizedBox(height: 10,),
                 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                   Text("PRICE /=",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                   Text(price,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+
+                   userGroup != "Admin"?
                   
                     MaterialButton(
                   onPressed: () async {
@@ -46,7 +54,18 @@ class FoodItem extends StatelessWidget {
                     "ORDER",
                     style: TextStyle(color: Colors.white),
                   ),
-                )],)
+                ): 
+                    MaterialButton(
+                  onPressed: () async {
+                 
+                  },
+                  color: Colors.green,
+                  child: const Text(
+                    "REMOVE",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                )
+                ],)
                 ]),
           )
           

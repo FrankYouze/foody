@@ -4,14 +4,19 @@ import 'package:foody/components/client_food.dart';
 import 'package:foody/components/widgets/dialogbox.dart';
 
 class AdminPage extends StatefulWidget {
-  const AdminPage({super.key});
+  final String User;
+  const AdminPage({super.key, required this.User});
 
   @override
   State<AdminPage> createState() => _AdminPageState();
 }
 
 class _AdminPageState extends State<AdminPage> {
+
+
+
     String list = "";
+    String _userGroup = "";
 
     void addNewFood() {
     
@@ -23,6 +28,17 @@ class _AdminPageState extends State<AdminPage> {
         );
       },
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      _userGroup = widget.User;
+     // print(widget.User);
+      
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -75,7 +91,7 @@ class _AdminPageState extends State<AdminPage> {
           Expanded(
               child: Container(
             color: Colors.white,
-            child: list == "FOOD"? ClientFood() : ClientDrinks(),
+            child: list == "FOOD"? ClientFood(user: _userGroup,) : ClientDrinks(User: _userGroup)
             ),
           )
         ],

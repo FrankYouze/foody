@@ -72,7 +72,7 @@ class LoginPage extends StatelessWidget {
                   onPressed: () {
                   // signInUser();
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AdminPage()));
+                        MaterialPageRoute(builder: (context) => AdminPage(User: 'Admin',)));
                   },
                   color: Colors.green,
                   child: Text(

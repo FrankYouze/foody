@@ -18,7 +18,7 @@ builder: (context,snapshot){
 
 if(snapshot.hasData){
 
-  return AdminPage();
+  return AdminPage(User: 'Admin',);
 }else{
 
   return LoginPage();

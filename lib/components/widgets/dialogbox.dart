@@ -107,10 +107,15 @@ class MyDialogBox extends StatelessWidget {
               children: [
                 MaterialButton(
                   onPressed: () async {
-                    await foodDB.child(FoodNameCon.text).set({
-                      "FoodPrice": FoodPriceCon.text,
-                      "FoodImage": ImageUrl
-                    });
+                    try {
+                      await foodDB.child(FoodNameCon.text).set({
+                        "FoodPrice": FoodPriceCon.text,
+                        "FoodImage": ImageUrl
+                      });
+                    } catch (e) {
+                      print(e);
+                    }
+
                     FoodPriceCon.clear();
                     FoodNameCon.clear();
                   },
@@ -122,10 +127,12 @@ class MyDialogBox extends StatelessWidget {
                 ),
                 MaterialButton(
                   onPressed: () async {
-                    await drinksDB.child(FoodNameCon.text).set({
-                      "FoodPrice": FoodPriceCon.text,
-                      "FoodImage": ImageUrl
-                    });
+                    try {
+                      await drinksDB.child(FoodNameCon.text).set({
+                        "FoodPrice": FoodPriceCon.text,
+                        "FoodImage": ImageUrl
+                      });
+                    } catch (e) {}
 
                     FoodPriceCon.clear();
                     FoodNameCon.clear();

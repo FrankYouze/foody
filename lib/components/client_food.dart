@@ -16,7 +16,7 @@ class _ClientFoodState extends State<ClientFood> {
       FoodItem(), FoodItem(),
       FoodItem(), FoodItem(),
       FoodItem(), FoodItem(),
-      FoodItem(), FoodItem()
+      FoodItem(), FoodItem(),
       
       ]),
     );

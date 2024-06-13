@@ -97,7 +97,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PassConpage()));
           Expanded(
               child: Container(
             color: Colors.white,
-            child: list == "DRINKS"? ClientDrinks(User: _userGroup) : ClientFood(user: _userGroup,)
+            child: list == "DRINKS"? ClientDrinks(user: _userGroup) : ClientFood(user: _userGroup,)
             ),
           )
         ],

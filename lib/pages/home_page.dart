@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foody/pages/auth_page.dart';
 import 'package:foody/pages/client_page.dart';
-import 'package:foody/pages/login_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

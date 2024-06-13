@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foody/components/admin_dashboard.dart';
 import 'package:foody/pages/admin_page.dart';
 import 'package:foody/pages/auth_page.dart';
 
@@ -72,7 +73,7 @@ class LoginPage extends StatelessWidget {
                   onPressed: () {
                   // signInUser();
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AdminPage(User: 'Admin',)));
+                        MaterialPageRoute(builder: (context) => AdminDashboard()));
                   },
                   color: Colors.green,
                   child: Text(

@@ -1,4 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foody/components/client_drinks.dart';
 import 'package:foody/components/client_food.dart';
@@ -104,7 +103,7 @@ class _ClientPageState extends State<ClientPage> {
           Expanded(
             child: Container(
               color: Colors.white,
-              child: list == "DRINKS" ? ClientDrinks(User: _userGroup,) : ClientFood(user: _userGroup,),
+              child: list == "DRINKS" ? ClientDrinks(user: _userGroup,) : ClientFood(user: _userGroup,),
             ),
           )
         ],

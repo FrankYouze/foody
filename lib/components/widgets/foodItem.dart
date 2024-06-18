@@ -5,8 +5,10 @@ class FoodItem extends StatelessWidget {
   final String ImageUrl;
   final String foodName;
   final String price;
+  final Function ()? AdminRem;
+  final Function ()? ClientOrd;
   final String userGroup;
-   FoodItem({super.key, required this.ImageUrl, required this.foodName, required this.price, required this.userGroup});
+   FoodItem({super.key, required this.ImageUrl, required this.foodName, required this.price, required this.userGroup, this.AdminRem, this.ClientOrd});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class FoodItem extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
 
-        color: Colors.green[200],
+        color: Colors.grey[200],
         
         ),
         child: Padding(
@@ -46,20 +48,16 @@ class FoodItem extends StatelessWidget {
                    userGroup != "Admin"?
                   
                     MaterialButton(
-                  onPressed: () async {
-                 
-                  },
-                  color: Colors.green,
+                  onPressed:ClientOrd,
+                  color: Colors.grey,
                   child: const Text(
                     "ORDER",
                     style: TextStyle(color: Colors.white),
                   ),
                 ): 
                     MaterialButton(
-                  onPressed: () async {
-                 
-                  },
-                  color: Colors.green,
+                  onPressed:AdminRem,
+                  color: Colors.grey,
                   child: const Text(
                     "REMOVE",
                     style: TextStyle(color: Colors.white),

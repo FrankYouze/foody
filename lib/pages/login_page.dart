@@ -19,6 +19,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green[100],
+      floatingActionButton: FloatingActionButton(onPressed: (){},child: Text("HELLOW"),),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(

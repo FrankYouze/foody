@@ -1,9 +1,9 @@
-import 'dart:io';
-
+import 'dart:typed_data';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class MyDialogBox extends StatelessWidget {
   const MyDialogBox({super.key});
@@ -20,6 +20,7 @@ class MyDialogBox extends StatelessWidget {
     final FoodNameCon = TextEditingController();
     final FoodPriceCon = TextEditingController();
     String ImageUrl = "";
+     //Uint8List webFile = Uint8List(8);
 
     return AlertDialog(
       backgroundColor: Colors.green[100],
@@ -48,20 +49,72 @@ class MyDialogBox extends StatelessWidget {
                     ImagePicker picker = ImagePicker();
                     XFile? imageFile =
                         await picker.pickImage(source: ImageSource.gallery);
+
                     print('${imageFile?.path}');
                     if (imageFile == null) return;
+                 var f = await imageFile.readAsBytes();
+              //   var g = imageFile.fileBytes;
+               //final html.File webFile = html.File(await imageFile.readAsBytes(), imageFile.name);
 
                     String uniqueName =
                         DateTime.now().microsecondsSinceEpoch.toString();
                     Reference newImage = FoodImageRef.child(uniqueName);
 
-                    try {
-                      await newImage.putFile(File(imageFile.path));
-                      ImageUrl = await newImage.getDownloadURL();
-                      print(ImageUrl);
-                    } catch (error) {
-                      print(error);
-                    }
+
+try{
+
+await newImage.putData(f);
+//await newImage.putFile(Image.memory(webFile));
+ ImageUrl = await newImage.getDownloadURL();
+
+}catch(e){
+
+
+}
+
+
+
+
+
+
+  //   try {
+  //     String uniqueName = DateTime.now().microsecondsSinceEpoch.toString();
+  //     Reference storageRef = FirebaseStorage.instance.ref().child('food_images').child(uniqueName);
+
+  //     UploadTask uploadTask;
+  //     if (kIsWeb) {
+  //  // html.File webFile = await ImagePicker.platform.getImageFromSource(source: ImageSource.gallery) as html.File;
+  //   Uint8List fileBytes = await imageFile.readAsBytes();
+  //   uploadTask = storageRef.putData(fileBytes);
+  //     } else {
+  //     //  uploadTask = storageRef.putFile(File(imageFile.path));
+  //     }
+
+  //   //  await uploadTask.whenComplete(() async {
+  //      // imageUrl = await storageRef.getDownloadURL();
+  //      // print('Download URL: $imageUrl');
+  // //    });
+  //   } catch (error) {
+  //     print('Error uploading file: $error');
+  //   }
+
+
+
+
+
+
+
+
+                   
+
+                    // try {
+                       
+                    //   await newImage.putFile(Image.memory(webFile));
+                    //   ImageUrl = await newImage.getDownloadURL();
+                    //   print(ImageUrl);
+                    // } catch (error) {
+                    //   print(error);
+                    // }
                   },
                   icon: const Icon(
                     Icons.camera,
@@ -107,7 +160,8 @@ class MyDialogBox extends StatelessWidget {
               children: [
                 MaterialButton(
                   onPressed: () async {
-                    if (FoodNameCon.text == "" || FoodPriceCon.text == "" ) return;
+                    if (FoodNameCon.text == "" || FoodPriceCon.text == "")
+                      return;
                     try {
                       await foodDB.child(FoodNameCon.text).set({
                         "FoodPrice": FoodPriceCon.text,
@@ -119,9 +173,6 @@ class MyDialogBox extends StatelessWidget {
 
                     FoodPriceCon.clear();
                     FoodNameCon.clear();
-                    
-
-              
                   },
                   color: Colors.green,
                   child: const Text(
@@ -131,7 +182,8 @@ class MyDialogBox extends StatelessWidget {
                 ),
                 MaterialButton(
                   onPressed: () async {
-                      if (FoodNameCon.text == "" || FoodPriceCon.text == "" ) return;
+                    if (FoodNameCon.text == "" || FoodPriceCon.text == "")
+                      return;
                     try {
                       await drinksDB.child(FoodNameCon.text).set({
                         "FoodPrice": FoodPriceCon.text,

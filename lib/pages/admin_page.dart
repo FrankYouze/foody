@@ -46,7 +46,7 @@ class _AdminPageState extends State<AdminPage> {
  return Scaffold(
       backgroundColor: Colors.green[100],
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.grey,
         title: Text("CafeApp",style: TextStyle(color: Colors.white),),
         actions: [IconButton(onPressed: (){
 Navigator.push(context, MaterialPageRoute(builder: (context)=> PassConpage()));
@@ -57,7 +57,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PassConpage()));
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(20.0),
         child: FloatingActionButton(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.grey,
           onPressed: addNewFood,child: Icon(Icons.add,color: Colors.white,size: 30,),),
       ),
       body: Column(
@@ -75,7 +75,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PassConpage()));
                       setState(() {
                         list = "FOOD";
                       });
-                    }, child: Text("FOOD",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold,fontSize: 20),)),
+                    }, child: Text("FOOD",style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold,fontSize: 20),)),
                   ),
                 )),
                 Expanded(
@@ -87,7 +87,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=> PassConpage()));
                       setState(() {
                         list = "DRINKS";
                       });
-                     }, child: Text("DRINKS",style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold,fontSize: 20))
+                     }, child: Text("DRINKS",style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold,fontSize: 20))
                      )
                   ),
                 ))

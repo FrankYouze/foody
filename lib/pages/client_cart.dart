@@ -88,7 +88,9 @@ class _CartPageState extends State<CartPage> {
                   )],), MyButton(onTap: (){}, text: "ORDER NOW"),
                   SizedBox(height: 20,),
         
-          Container(color: Colors.green,child: Text("PLEASE DISPOSE WASTE "),)
+          Container(
+            height: 50,
+            color: Colors.red,child: Center(child: Text("PLEASE DISPOSE WASTE IN APROPIATE PLACE ",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),)
         ],
             ),
             

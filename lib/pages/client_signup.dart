@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foody/components/widgets/my_button.dart';
 import 'package:foody/components/widgets/my_textfield.dart';
+import 'package:foody/pages/home_page.dart';
 import 'package:foody/pages/login_page.dart';
 
 
@@ -104,14 +105,11 @@ void addItemToDatabase(String phone,String Name,String Reg)async {
                   obscu: false,
                   controller: userNamecon,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                MyTextField(
-                  myText: "enter NIDA number",
-                  obscu: false,
-                  controller: userNIDAcon,
-                ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
+           
+           
                 const SizedBox(
                   height: 20,
                 ),
@@ -144,13 +142,13 @@ void addItemToDatabase(String phone,String Name,String Reg)async {
                   onTap: () async{
                     
           
-                  await signUpWithEmailPassword(userEmailcon.text, passcon.text);
-                 addItemToDatabase(userPhonecon.text,userNamecon.text,userNIDAcon.text);
+                //   await signUpWithEmailPassword(userEmailcon.text, passcon.text);
+                //  addItemToDatabase(userPhonecon.text,userNamecon.text,userNIDAcon.text);
 
                  await  Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => LoginPage(),
+                        builder: (context) => HomePage(),
                       ),
                      );
                

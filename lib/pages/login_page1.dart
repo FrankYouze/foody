@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:foody/components/widgets/my_button.dart';
 import 'package:foody/components/widgets/my_textfield.dart';
 import 'package:foody/pages/client_signup.dart';
+import 'package:foody/pages/home_page.dart';
 
 class ClientLoginPage extends StatelessWidget {
   ClientLoginPage({super.key});
@@ -60,12 +61,12 @@ class ClientLoginPage extends StatelessWidget {
                 MyButton(
                   text: "Login",
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => HomePage(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                    );
                   },
                 ),
                 const SizedBox(
@@ -77,7 +78,7 @@ class ClientLoginPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
-                        'Are you Service Provider ?',
+                        'New user?',
                         style: TextStyle(),
                       ),
                       TextButton(

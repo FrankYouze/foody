@@ -13,7 +13,7 @@ final String text;
      Container(
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.symmetric(horizontal: 25),
-      decoration: BoxDecoration(color: Colors.grey,borderRadius: BorderRadius.circular(100)),
+      decoration: BoxDecoration(color: Colors.grey,borderRadius: BorderRadius.circular(50)),
       child:  Center(
         child: Text(text,style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),
         

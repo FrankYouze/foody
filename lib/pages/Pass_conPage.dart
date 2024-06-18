@@ -11,7 +11,7 @@ class _PassConpageState extends State<PassConpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[100],
+      backgroundColor: Colors.grey[100],
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
@@ -34,7 +34,7 @@ class _PassConpageState extends State<PassConpage> {
                     controller:TextEditingController(),
                     decoration: InputDecoration(
                       enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.green)),
+                          borderSide: BorderSide(color: Colors.grey)),
                       focusedBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white)),
                       border: OutlineInputBorder(),
@@ -51,7 +51,7 @@ class _PassConpageState extends State<PassConpage> {
                     controller: TextEditingController(),
                     decoration: InputDecoration(
                       enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.green)),
+                          borderSide: BorderSide(color: Colors.grey)),
                       focusedBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white)),
                       border: OutlineInputBorder(),
@@ -67,7 +67,7 @@ class _PassConpageState extends State<PassConpage> {
                   // signInUser();
                     
                   },
-                  color: Colors.green,
+                  color: Colors.grey,
                   child: Text(
                     "RESET",
                     style: TextStyle(color: Colors.white),

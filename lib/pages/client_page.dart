@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foody/components/client_drinks.dart';
 import 'package:foody/components/client_food.dart';
+import 'package:foody/pages/Pass_conPage.dart';
 import 'package:foody/pages/client_cart.dart';
 
 class ClientPage extends StatefulWidget {
@@ -37,12 +38,12 @@ class _ClientPageState extends State<ClientPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[100],
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.grey,
         title: Text(
           "CafeApp",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
         ),
         iconTheme: IconThemeData(color: Colors.white),
         actions: [
@@ -51,7 +52,14 @@ class _ClientPageState extends State<ClientPage> {
               context,
               MaterialPageRoute(builder: (context) => CartPage()),
             );
-          }, icon: Icon(Icons.shopping_cart))
+          }, icon: Icon(Icons.shopping_cart)),
+           IconButton(onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PassConpage()),
+            );
+          }, icon: Icon(Icons.security)),
+          
         ],
       ),
       body: Column(
@@ -74,7 +82,7 @@ class _ClientPageState extends State<ClientPage> {
                         child: Text(
                           "FOOD",
                           style: TextStyle(
-                              color: Colors.green,
+                              color: Colors.grey,
                               fontWeight: FontWeight.bold,
                               fontSize: 20),
                         )),
@@ -93,7 +101,7 @@ class _ClientPageState extends State<ClientPage> {
                           },
                           child: Text("DRINKS",
                               style: TextStyle(
-                                  color: Colors.green,
+                                  color: Colors.grey,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20)))),
                 ))

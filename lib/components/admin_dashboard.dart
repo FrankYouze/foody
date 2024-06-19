@@ -63,7 +63,37 @@ class _AdminDashboardState extends State<AdminDashboard> {
             child: Container(
               height: double.infinity,
                 color: Colors.grey,
-              child: Text("ALL ORDERS")),
+              child: ListView(
+                children: [
+                  Card(
+                    child: ListTile(title: Text("FOOD NAME"),
+                    trailing: Column(children: [Text("LOCATION"),
+                    Text("PHONE NUMBER"),
+                    
+                    
+                    ],),
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(title: Text("FOOD NAME"),
+                    trailing: Column(children: [Text("LOCATION"),
+                    Text("PHONE NUMBER"),
+                    
+                    
+                    ],),
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(title: Text("FOOD NAME"),
+                    trailing: Column(children: [Text("LOCATION"),
+                    Text("PHONE NUMBER"),
+                    
+                    
+                    ],),
+                    ),
+                  )
+                ],
+              )),
           ))
           
           ],

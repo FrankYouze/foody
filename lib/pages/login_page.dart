@@ -18,7 +18,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[100],
+      backgroundColor: Colors.grey[100],
       floatingActionButton: FloatingActionButton(onPressed: (){},child: Text("HELLOW"),),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -42,7 +42,7 @@ class LoginPage extends StatelessWidget {
                     controller:emailcon,
                     decoration: InputDecoration(
                       enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.green)),
+                          borderSide: BorderSide(color: Colors.grey)),
                       focusedBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white)),
                       border: OutlineInputBorder(),
@@ -76,7 +76,7 @@ class LoginPage extends StatelessWidget {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => AdminDashboard()));
                   },
-                  color: Colors.green,
+                  color: Colors.grey,
                   child: Text(
                     "Login",
                     style: TextStyle(color: Colors.white),

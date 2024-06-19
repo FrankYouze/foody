@@ -5,8 +5,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foody/components/widgets/my_button.dart';
 import 'package:foody/components/widgets/my_textfield.dart';
-import 'package:foody/pages/home_page.dart';
-import 'package:foody/pages/login_page.dart';
+// import 'package:foody/pages/home_page.dart';
+// import 'package:foody/pages/login_page.dart';
+import 'package:foody/pages/login_page1.dart';
 
 
 class SignUpPage extends StatelessWidget {
@@ -15,13 +16,13 @@ class SignUpPage extends StatelessWidget {
     final DatabaseReference usersDatabaseRef =
       FirebaseDatabase.instance.ref().child("RegUsers");
   final userNamecon = TextEditingController();
-  final userNIDAcon = TextEditingController();
+  // final userNIDAcon = TextEditingController();
   final userEmailcon = TextEditingController();
   final userPhonecon = TextEditingController();
   final passcon = TextEditingController();
 
   
-    Future<void> signUpWithEmailPassword(String email, String password) async {
+Future<void> signUpWithEmailPassword(String email, String password) async {
   try {
     UserCredential userCredential = await auth2.createUserWithEmailAndPassword(
       email: email,
@@ -36,29 +37,37 @@ class SignUpPage extends StatelessWidget {
 
   
 }
+void addItemToDatabase(
+  String phone,
+  String Name,
+  
+  )
+  async {
+    await  usersDatabaseRef.child(
+      Name
+      )
+      .set(
+        {  "Name":Name,
+          "PhoneNumber": phone,
+           }
+          );
 
-
-
-void addItemToDatabase(String phone,String Name,String Reg)async {
-  await  usersDatabaseRef.child(Name)
-                         .set({
-                            "PhoneNumber": phone,
-                           "NIDA": Reg,
-                          
-                          });
-                  
-          
-                          
-
-}
-
-
-
+        }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-     backgroundColor: Colors.grey[100],
+    return Container(
+      decoration: const BoxDecoration(
+      image: DecorationImage(
+      image: AssetImage(
+        'assets/img/soda.jpg',
+        ),
+        fit: BoxFit.fitHeight,
+        )
+        ),
+
+     child: Scaffold(
+     backgroundColor: Colors.transparent,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
@@ -70,7 +79,7 @@ void addItemToDatabase(String phone,String Name,String Reg)async {
                 const Text(
                   "Sign Up",
                   style: TextStyle(
-                      color: Color.fromARGB(255, 44, 43, 43),
+                      color: Colors.white,
                       fontSize: 30,
                       fontWeight: FontWeight.bold),
                 ),
@@ -80,11 +89,11 @@ void addItemToDatabase(String phone,String Name,String Reg)async {
                 Container(
                   width: 150,
                   height: 150,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.grey,
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.person,
                     color: Colors.white70,
                     size: 140,
@@ -93,7 +102,7 @@ void addItemToDatabase(String phone,String Name,String Reg)async {
                 const Text(
                   "My Profile",
                   style: TextStyle(
-                      color: Color.fromARGB(255, 44, 43, 43),
+                      color: Colors.white,
                       fontSize: 30,
                       fontWeight: FontWeight.bold),
                 ),
@@ -142,15 +151,15 @@ void addItemToDatabase(String phone,String Name,String Reg)async {
                   onTap: () async{
                     
           
-                //   await signUpWithEmailPassword(userEmailcon.text, passcon.text);
-                //  addItemToDatabase(userPhonecon.text,userNamecon.text,userNIDAcon.text);
-
-                 await  Navigator.push(
+                  await signUpWithEmailPassword(userEmailcon.text, passcon.text);
+                 addItemToDatabase(userPhonecon.text,userNamecon.text);
+ await  Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomePage(),
+                        builder: (context) =>  ClientLoginPage(),
                       ),
                      );
+                
                
                   },
                 ),
@@ -162,6 +171,7 @@ void addItemToDatabase(String phone,String Name,String Reg)async {
           ),
         ),
       ),
+    ),
     );
   }
 }

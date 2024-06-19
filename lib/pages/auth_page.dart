@@ -2,7 +2,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foody/pages/admin_page.dart';
+import 'package:foody/pages/client_page.dart';
 import 'package:foody/pages/login_page.dart';
+import 'package:foody/pages/login_page1.dart';
 
 
 
@@ -18,10 +20,10 @@ builder: (context,snapshot){
 
 if(snapshot.hasData){
 
-  return AdminPage(User: 'Admin',);
+  return ClientPage();
 }else{
 
-  return LoginPage();
+  return ClientLoginPage();
 }
 
 },

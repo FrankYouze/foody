@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foody/pages/auth_page.dart';
 
 class PassConpage extends StatefulWidget {
   const PassConpage({super.key});
@@ -65,11 +67,26 @@ class _PassConpageState extends State<PassConpage> {
                 MaterialButton(
                   onPressed: () {
                   // signInUser();
-                    
+                     //FirebaseAuth.instance.signOut();
                   },
                   color: Colors.grey,
                   child: Text(
                     "RESET",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                    SizedBox(
+                  height: 20,
+                ),
+                MaterialButton(
+                  onPressed: () {
+                  // signInUser();
+                     FirebaseAuth.instance.signOut();
+                     Navigator.push(context,MaterialPageRoute(builder: (context)=> AuthPage()))
+                  },
+                  color: Colors.grey,
+                  child: Text(
+                    "LOG OUT",
                     style: TextStyle(color: Colors.white),
                   ),
                 )

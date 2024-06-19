@@ -1,11 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
-
 import 'package:flutter/material.dart';
 import 'package:foody/components/widgets/my_button.dart';
 import 'package:foody/components/widgets/my_textfield.dart';
+import 'package:foody/pages/client_page.dart';
 import 'package:foody/pages/client_signup.dart';
-import 'package:foody/pages/home_page.dart';
+// import 'package:foody/pages/home_page.dart';
 
 class ClientLoginPage extends StatelessWidget {
   ClientLoginPage({super.key});
@@ -14,17 +13,39 @@ class ClientLoginPage extends StatelessWidget {
   final passcon = TextEditingController();
 
  void signInUser()async{
-
+try{
  await FirebaseAuth.instance.signInWithEmailAndPassword(
    email: userEmailcon.text,
-    password: passcon.text);
+    password: passcon.text);}catch(error){
+      print(error);
+    }
 
  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: SafeArea(
+    return Container(
+    decoration: const BoxDecoration(
+      image: DecorationImage(
+      image: AssetImage(
+        'assets/img/soda.jpg',
+        ),
+        fit: BoxFit.fitHeight,
+        )
+        ),
+        child: Scaffold(
+          appBar: AppBar(
+            // ignore: prefer_const_constructors
+            backgroundColor: Color.fromARGB(255, 54, 54, 54),
+            title: const Text('CafeApp', 
+            style: TextStyle(
+            color: Colors.white,
+            fontSize: 50,
+            fontWeight: FontWeight.bold,
+            ),
+          ),
+          ),
+          backgroundColor: Colors.transparent,
+         body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -35,7 +56,7 @@ class ClientLoginPage extends StatelessWidget {
                 const Text(
                   "Sign In",
                   style: TextStyle(
-                      color: Color.fromARGB(255, 44, 43, 43),
+                      color: Colors.white,
                       fontSize: 30,
                       fontWeight: FontWeight.bold),
                 ),
@@ -43,7 +64,7 @@ class ClientLoginPage extends StatelessWidget {
                   height: 10,
                 ),
                 MyTextField(
-                  myText: "enter user name",
+                  myText: "enter user email",
                   obscu: false,
                   controller: userEmailcon,
                 ),
@@ -59,14 +80,16 @@ class ClientLoginPage extends StatelessWidget {
                   height: 20,
                 ),
                 MyButton(
-                  text: "Login",
+                  text: "Signin",
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    );
+                      signInUser();
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const ClientPage(),
+                    //   ),
+                    // );
+                  
                   },
                 ),
                 const SizedBox(
@@ -77,9 +100,12 @@ class ClientLoginPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
+                      const Text(
                         'New user?',
-                        style: TextStyle(),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
                       ),
                       TextButton(
                         onPressed: () {
@@ -91,11 +117,12 @@ class ClientLoginPage extends StatelessWidget {
                             ),
                           );
                         },
-                        child: Text(
+                        child: const Text(
                           "Register Here",
                           style: TextStyle(
-                            color: Colors.blue,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.italic,
                             fontSize: 18,
                           ),
                         ),
@@ -107,7 +134,8 @@ class ClientLoginPage extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      ), 
+        ),
+       );
   }
 }

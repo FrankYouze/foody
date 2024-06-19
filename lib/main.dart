@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:foody/firebase_options.dart';
+import 'package:foody/pages/auth_page.dart';
 import 'package:foody/pages/home_page.dart';
 import 'package:foody/pages/login_page.dart';
 import 'package:foody/pages/login_page1.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
    //flutter run -d chrome --web-renderer html
-      home: width <= 500 ? ClientLoginPage() : HomePage(),
+      home: width <= 500 ? AuthPage() : LoginPage(),
     );
   }
 }

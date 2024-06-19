@@ -40,7 +40,7 @@ class _ClientPageState extends State<ClientPage> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.grey[900],
         title: Text(
           "CafeApp",
           style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
@@ -58,7 +58,7 @@ class _ClientPageState extends State<ClientPage> {
               context,
               MaterialPageRoute(builder: (context) => PassConpage()),
             );
-          }, icon: Icon(Icons.security)),
+          }, icon: Icon(Icons.person)),
           
         ],
       ),

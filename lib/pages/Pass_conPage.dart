@@ -82,7 +82,7 @@ class _PassConpageState extends State<PassConpage> {
                   onPressed: () {
                   // signInUser();
                      FirebaseAuth.instance.signOut();
-                     Navigator.push(context,MaterialPageRoute(builder: (context)=> AuthPage()))
+                     Navigator.push(context,MaterialPageRoute(builder: (context)=> AuthPage()));
                   },
                   color: Colors.grey,
                   child: Text(

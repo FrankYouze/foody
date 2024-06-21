@@ -164,6 +164,7 @@ await newImage.putData(f);
                       return;
                     try {
                       await foodDB.child(FoodNameCon.text).set({
+                        // "FoodName":FoodNameCon.text,
                         "FoodPrice": FoodPriceCon.text,
                         "FoodImage": ImageUrl
                       });

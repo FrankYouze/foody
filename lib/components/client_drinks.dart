@@ -1,6 +1,9 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foody/components/widgets/foodItem.dart';
+import 'package:foody/models/cartItem.dart';
+import 'package:foody/models/food.dart';
+import 'package:provider/provider.dart';
 
 class ClientDrinks extends StatefulWidget {
   final String user;
@@ -20,6 +23,7 @@ class _ClientDrinksState extends State<ClientDrinks> {
   Map<String, dynamic> food = {};
   dynamic current;
   String userGroup = "";
+  List<Food> drinksList = [];
 
   @override
   void initState() {
@@ -35,7 +39,13 @@ class _ClientDrinksState extends State<ClientDrinks> {
 
         // print(availableDrinks[current]['FoodImage']);
 
-        // print(availableFoods[current]["FoodImage"]);
+              drinksList = availableDrinks.entries.map((entry) {
+  return Food(
+    FoodName: entry.key,
+    FoodPrice: entry.value['FoodPrice'],
+    FoodImage: entry.value['FoodImage'],
+  );
+}).toList();
       });
     });
   }
@@ -58,11 +68,16 @@ class _ClientDrinksState extends State<ClientDrinks> {
                     price: availableDrinks[current]['FoodPrice'],
                     userGroup: userGroup,
                     ClientOrd: () async {
-                      orderdListDB.push().set({
-                        "foodName": availableDrinks.keys.elementAt(i),
-                        "foodPrice": availableDrinks[current]['FoodPrice'],
-                        "location": "location"
-                      });
+                      // orderdListDB.push().set({
+                      //   "foodName": availableDrinks.keys.elementAt(i),
+                      //   "foodPrice": availableDrinks[current]['FoodPrice'],
+                      //   "location": "location"
+                      // });
+                       context.read<Cart>()
+                          .addToCart(drinksList[i]);
+                        //  print(foodList[index].FoodImage);
+
+                         // print(availableDrinks[current]);
                     },
                     AdminRem: () async {
                       drinksDB

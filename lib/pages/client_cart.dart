@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foody/components/widgets/my_button.dart';
+import 'package:foody/components/widgets/orderItem.dart';
+import 'package:foody/models/cartItem.dart';
+import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -11,6 +14,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
+    final cartFoods = context.watch<Cart>().cart;
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
@@ -27,7 +31,8 @@ class _CartPageState extends State<CartPage> {
               Card(child: ListTile(title: Text("FoodName"),trailing: Text("Price"),)),
               Card(child: ListTile(title: Text("FoodName"),trailing: Text("Price"),)),
               Card(child: ListTile(title: Text("FoodName"),trailing: Text("Price"),)),
-              Card(child: ListTile(title: Text("FoodName"),trailing: Text("Price"),))
+              Card(child: ListTile(title: Text("FoodName"),trailing: Text("Price"),)),
+              OrderItem(foodName: "SOMETHING", price: "Price", userGroup: "user")
               
               ],),
             ),
@@ -87,7 +92,10 @@ class _CartPageState extends State<CartPage> {
                       "GIRLS HOSTEL",
                       style: TextStyle(color: Colors.white),
                     ),
-                  )],), MyButton(onTap: (){}, text: "ORDER NOW"),
+                  )],), MyButton(onTap: (){
+
+                    print(cartFoods.length);
+                  }, text: "ORDER NOW"),
                   SizedBox(height: 20,),
         
           Container(

@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foody/components/order_list.dart';
 import 'package:foody/components/widgets/foodItem.dart';
+import 'package:foody/models/cartItem.dart';
+import 'package:foody/models/food.dart';
+import 'package:provider/provider.dart';
 
 class ClientFood extends StatefulWidget {
   final String user;
@@ -18,12 +22,15 @@ class _ClientFoodState extends State<ClientFood> {
       FirebaseDatabase.instance.ref().child("AddedDrinks");
   final DatabaseReference orderdListDB =
       FirebaseDatabase.instance.ref().child("OrderList");
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   Map<dynamic, dynamic> availableFoods = {};
   // Map<dynamic, dynamic> availableDrinks = {};
   Map<String, dynamic> food = {};
   dynamic current;
   String userGroup = "";
+  List <Food> foodList = [];
+
 
   @override
   void initState() {
@@ -34,7 +41,14 @@ class _ClientFoodState extends State<ClientFood> {
         // print("hellw world");
         availableFoods = Map<String, dynamic>.from(
             event.snapshot.value as Map<dynamic, dynamic>);
-        // print(availableFoods.keys);
+      foodList = availableFoods.entries.map((entry) {
+  return Food(
+    FoodName: entry.key,
+    FoodPrice: entry.value['FoodPrice'],
+    FoodImage: entry.value['FoodImage'],
+  );
+}).toList();
+
         userGroup = widget.user;
         // print(availableFoods[current]["FoodImage"]);
       });
@@ -71,16 +85,24 @@ class _ClientFoodState extends State<ClientFood> {
                   price: availableFoods[current]['FoodPrice'],
                   userGroup: userGroup,
                   ClientOrd: () async {
-orderdListDB.push().set({
-"foodName": availableFoods.keys.elementAt(index),
-  "foodPrice": availableFoods[current]['FoodPrice'],
-  "location":"location"
-});
+                    // final User? user = auth.currentUser;
+                    // final uid = user?.uid;
+
+                    // orderdListDB.child(uid!).child( availableFoods.keys.elementAt(index)).set({
+                    //  // "foodName": availableFoods.keys.elementAt(index),
+                    //    "foodPrice": availableFoods[current]['FoodPrice'],
+                    //   "location": "location"
+                    // });
+
+                 context.read<Cart>()
+                          .addToCart(foodList[index]);
+                          print(foodList[index].FoodImage);
 
                   },
-                  AdminRem: ()async{
-
-                    foodsDB.child(availableFoods.keys.elementAt(index)).remove();
+                  AdminRem: () async {
+                    foodsDB
+                        .child(availableFoods.keys.elementAt(index))
+                        .remove();
                   },
                 );
               }),

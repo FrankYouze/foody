@@ -68,11 +68,7 @@ class _ClientDrinksState extends State<ClientDrinks> {
                     price: availableDrinks[current]['FoodPrice'],
                     userGroup: userGroup,
                     ClientOrd: () async {
-                      // orderdListDB.push().set({
-                      //   "foodName": availableDrinks.keys.elementAt(i),
-                      //   "foodPrice": availableDrinks[current]['FoodPrice'],
-                      //   "location": "location"
-                      // });
+                     
                        context.read<Cart>()
                           .addToCart(drinksList[i]);
                         //  print(foodList[index].FoodImage);

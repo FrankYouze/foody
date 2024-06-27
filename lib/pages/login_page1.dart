@@ -35,11 +35,11 @@ try{
         child: Scaffold(
           appBar: AppBar(
             // ignore: prefer_const_constructors
-            backgroundColor: Color.fromARGB(255, 54, 54, 54),
+            backgroundColor: Colors.transparent,
             title: const Text('CafeApp', 
             style: TextStyle(
             color: Colors.white,
-            fontSize: 50,
+            fontSize: 30,
             fontWeight: FontWeight.bold,
             ),
           ),

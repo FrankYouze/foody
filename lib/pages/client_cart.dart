@@ -17,10 +17,12 @@ class _CartPageState extends State<CartPage> {
   final DatabaseReference OrderList =
       FirebaseDatabase.instance.ref().child("OrderList");
   final FirebaseAuth auth = FirebaseAuth.instance;
+ String Location = '';
 
   @override
   Widget build(BuildContext context) {
     final cartFoods = context.watch<Cart>().cart;
+   
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
@@ -55,13 +57,17 @@ class _CartPageState extends State<CartPage> {
             Container(
               child: Column(
                 children: [
-                  Text("YOUR LOCATION"),
+                  Text("YOUR LOCATION",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       MaterialButton(
-                        onPressed: () {},
-                        color: Colors.green,
+                        onPressed: () {
+                          setState(() {
+                            Location = "VIMBWETA";
+                          });
+                        },
+                        color: Colors.grey,
                         child: Text(
                           "VIMBWETA",
                           style: TextStyle(color: Colors.white),
@@ -72,9 +78,11 @@ class _CartPageState extends State<CartPage> {
                       ),
                       MaterialButton(
                         onPressed: () {
-                          // signInUser();
+                            setState(() {
+                            Location = "FUNCTION HALL";
+                          });
                         },
-                        color: Colors.green,
+                        color: Colors.grey,
                         child: Text(
                           "FUNCTION HALL",
                           style: TextStyle(color: Colors.white),
@@ -89,8 +97,12 @@ class _CartPageState extends State<CartPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       MaterialButton(
-                        onPressed: () {},
-                        color: Colors.green,
+                        onPressed: () {
+                            setState(() {
+                            Location = "BOYS HOSTEL";
+                          });
+                        },
+                        color: Colors.grey,
                         child: Text(
                           "BOYS HOSTEL",
                           style: TextStyle(color: Colors.white),
@@ -101,9 +113,11 @@ class _CartPageState extends State<CartPage> {
                       ),
                       MaterialButton(
                         onPressed: () {
-                          // signInUser();
+                          setState(() {
+                            Location = "GIRLS HOSTEL";
+                          });
                         },
-                        color: Colors.green,
+                        color: Colors.grey,
                         child: Text(
                           "GIRLS HOSTEL",
                           style: TextStyle(color: Colors.white),
@@ -113,15 +127,17 @@ class _CartPageState extends State<CartPage> {
                   ),
                   MyButton(
                       onTap: () async {
-                        print(cartFoods.length);
+                        print(Location);
                         final User? user = auth.currentUser;
                         final uid = user?.uid;
                         // print(context.read<Cart>().cart.toString());
-
+                       Location != ''?
                         await OrderList.child(uid!).set({
-                                    "Location" : "Location",
+                                    "Location" : Location,
                                     "Orders": context.read<Cart>().cart.toString()
-                          });
+                          }) :  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text('Please select a location')),
+  );
                       },
                       text: "ORDER NOW"),
                   SizedBox(

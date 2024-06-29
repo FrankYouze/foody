@@ -9,6 +9,6 @@ class Food {
 
     @override
   String toString() {
-    return '{name: $FoodName,price: $FoodPrice, image: $FoodImage}';
+    return '{name: "$FoodName",price: "$FoodPrice", image: "$FoodImage"}';
   }
 }

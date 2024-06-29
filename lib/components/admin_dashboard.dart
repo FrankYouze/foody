@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foody/components/client_drinks.dart';
 import 'package:foody/components/client_food.dart';
+import 'package:foody/components/order_list.dart';
 import 'package:foody/components/widgets/dialogbox.dart';
 import 'package:foody/pages/Pass_conPage.dart';
 
@@ -63,37 +64,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
             child: Container(
               height: double.infinity,
                 color: Colors.grey,
-              child: ListView(
-                children: [
-                  Card(
-                    child: ListTile(title: Text("FOOD NAME"),
-                    trailing: Column(children: [Text("LOCATION"),
-                    Text("PHONE NUMBER"),
-                    
-                    
-                    ],),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(title: Text("FOOD NAME"),
-                    trailing: Column(children: [Text("LOCATION"),
-                    Text("PHONE NUMBER"),
-                    
-                    
-                    ],),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(title: Text("FOOD NAME"),
-                    trailing: Column(children: [Text("LOCATION"),
-                    Text("PHONE NUMBER"),
-                    
-                    
-                    ],),
-                    ),
-                  )
-                ],
-              )),
+              child: OrderList()),
           ))
           
           ],

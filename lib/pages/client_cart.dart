@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:foody/components/widgets/my_button.dart';
 import 'package:foody/components/widgets/orderItem.dart';
+import 'package:foody/components/widgets/order_placed.dart';
 import 'package:foody/models/cartItem.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +19,20 @@ class _CartPageState extends State<CartPage> {
       FirebaseDatabase.instance.ref().child("OrderList");
   final FirebaseAuth auth = FirebaseAuth.instance;
  String Location = '';
+
+ void placeOrder()async{
+
+      final User? user = auth.currentUser;
+                        final uid = user?.uid;
+    await OrderList.child(uid!).set({
+                                    "Location" : Location,
+                                    "Orders": context.read<Cart>().cart.toString()
+                          });
+                          showDialog(context: context, builder: (context){
+
+                            return OrderPlaced();
+                          });
+ }
 
   @override
   Widget build(BuildContext context) {
@@ -127,15 +142,21 @@ class _CartPageState extends State<CartPage> {
                   ),
                   MyButton(
                       onTap: () async {
-                        print(Location);
-                        final User? user = auth.currentUser;
-                        final uid = user?.uid;
+                      //  print(Location);
+                        // final User? user = auth.currentUser;
+                        // final uid = user?.uid;
                         // print(context.read<Cart>().cart.toString());
                        Location != ''?
-                        await OrderList.child(uid!).set({
-                                    "Location" : Location,
-                                    "Orders": context.read<Cart>().cart.toString()
-                          }) :  ScaffoldMessenger.of(context).showSnackBar(
+                        // await OrderList.child(uid!).set({
+                        //             "Location" : Location,
+                        //             "Orders": context.read<Cart>().cart.toString()
+                        //   })
+                        //   showDialog(context: context, builder: (context){
+
+                        //     return OrderPlaced();
+                        //   });
+                        placeOrder()
+                           :  ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(content: Text('Please select a location')),
   );
                       },

@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
       double width = MediaQuery.of(context).size.width;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
    //flutter run -d chrome --web-renderer html
       home: width <= 500 ? AuthPage() : LoginPage(),

@@ -28,18 +28,20 @@ class _AdminDashboardState extends State<AdminDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("ADMIN APP"),backgroundColor: Colors.grey,actions: [
+      appBar: AppBar(title: Text("ADMIN APP",style: TextStyle(color: Colors.white),),backgroundColor: Colors.grey[800],actions: [
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: IconButton(icon: Icon(Icons.admin_panel_settings,size: 30,),onPressed: (){
                  Navigator.push(context, MaterialPageRoute(builder: (context)=> PassConpage()));
           }),
         )
-      ],),
+      ],
+      iconTheme: IconThemeData(color: Colors.white),
+      ),
        floatingActionButton: Padding(
         padding: const EdgeInsets.all(20.0),
         child: FloatingActionButton(
-          backgroundColor: Colors.grey,
+          backgroundColor: Colors.grey[900],
           onPressed: addNewFood,child: Icon(Icons.add,color: Colors.white,size: 30,),),
       ),
       body: SafeArea(

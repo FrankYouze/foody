@@ -85,14 +85,7 @@ class _ClientFoodState extends State<ClientFood> {
                   price: availableFoods[current]['FoodPrice'],
                   userGroup: userGroup,
                   ClientOrd: () async {
-                    // final User? user = auth.currentUser;
-                    // final uid = user?.uid;
-
-                    // orderdListDB.child(uid!).child( availableFoods.keys.elementAt(index)).set({
-                    //  // "foodName": availableFoods.keys.elementAt(index),
-                    //    "foodPrice": availableFoods[current]['FoodPrice'],
-                    //   "location": "location"
-                    // });
+        
 
                  context.read<Cart>()
                           .addToCart(foodList[index]);

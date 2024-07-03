@@ -28,10 +28,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("ADMIN APP",style: TextStyle(color: Colors.white),),backgroundColor: Colors.grey[800],actions: [
+      appBar: AppBar(title: Text("ADMIN APP",style: TextStyle(color: Colors.white,),textAlign: TextAlign.center,),backgroundColor: Colors.grey[800],actions: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: IconButton(icon: Icon(Icons.admin_panel_settings,size: 30,),onPressed: (){
+          child: IconButton(icon: Icon(Icons.person,size: 30,),onPressed: (){
                  Navigator.push(context, MaterialPageRoute(builder: (context)=> PassConpage()));
           }),
         )

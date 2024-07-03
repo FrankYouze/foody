@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foody/models/cartItem.dart';
 import 'package:foody/pages/auth_page.dart';
+import 'package:provider/provider.dart';
 
 class PassConpage extends StatefulWidget {
   const PassConpage({super.key});
@@ -82,6 +84,8 @@ class _PassConpageState extends State<PassConpage> {
                   onPressed: () {
                   // signInUser();
                      FirebaseAuth.instance.signOut();
+                     
+                 context.read<Cart>().clearCart();
                      Navigator.push(context,MaterialPageRoute(builder: (context)=> AuthPage()));
                   },
                   color: Colors.grey,

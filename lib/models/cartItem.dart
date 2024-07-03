@@ -31,6 +31,11 @@ class Cart extends ChangeNotifier{
     notifyListeners();
   }
 
+  void clearCart() {
+    _cart.clear();
+    notifyListeners();
+  }
+
   // // Add item to wishlist
   // void addToWishlist(Product item) {
   //   _wishlist.add(item);

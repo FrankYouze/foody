@@ -23,7 +23,7 @@ class MyDialogBox extends StatelessWidget {
      //Uint8List webFile = Uint8List(8);
 
     return AlertDialog(
-      backgroundColor: Colors.green[100],
+      backgroundColor: Colors.grey[100],
       content: Container(
         height: 340,
         width: 300,
@@ -41,7 +41,7 @@ class MyDialogBox extends StatelessWidget {
               height: 100,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.green,
+                color: Colors.grey,
               ),
               child: Center(
                 child: IconButton(
@@ -131,7 +131,7 @@ await newImage.putData(f);
               controller: FoodNameCon,
               decoration: const InputDecoration(
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.green)),
+                    borderSide: BorderSide(color: Colors.grey)),
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white)),
                 border: OutlineInputBorder(),
@@ -145,7 +145,7 @@ await newImage.putData(f);
               controller: FoodPriceCon,
               decoration: const InputDecoration(
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.green)),
+                    borderSide: BorderSide(color: Colors.grey)),
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white)),
                 border: OutlineInputBorder(),
@@ -175,7 +175,7 @@ await newImage.putData(f);
                     FoodPriceCon.clear();
                     FoodNameCon.clear();
                   },
-                  color: Colors.green,
+                  color: Colors.grey[700],
                   child: const Text(
                     "FOOD",
                     style: TextStyle(color: Colors.white),

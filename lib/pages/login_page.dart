@@ -19,71 +19,85 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      floatingActionButton: FloatingActionButton(onPressed: (){},child: Text("HELLOW"),),
-      body: SafeArea(
+          body: SafeArea(
         child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 200,
-                ),
-                const Text(
-                  "Login",
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 44, 43, 43), fontSize: 22),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
-                    controller:emailcon,
-                    decoration: InputDecoration(
-                      enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey)),
-                      focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      border: OutlineInputBorder(),
-                      hintText: "Enter user Email",
-                    ),
+          child: Stack(
+             children :[ 
+              Container(
+                width :double.infinity,
+                height: 1000,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/old/123.jpg"),
+                    fit: BoxFit.cover,)
+              )),
+              Center(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 200,
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextField(
-                    controller: passCon,
-                    decoration: InputDecoration(
-                      enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.green)),
-                      focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      border: OutlineInputBorder(),
-                      hintText: "Enter password",
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                MaterialButton(
-                  onPressed: () {
-                  // signInUser();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AdminDashboard()));
-                  },
-                  color: Colors.grey,
-                  child: Text(
+                  const Text(
                     "Login",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 240, 254, 255), fontSize: 30,fontWeight:  FontWeight.bold),
                   ),
-                )
-              ],
-            ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: TextField(
+                      controller:emailcon,
+                      decoration: InputDecoration(
+                        enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey)),
+                        focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        border: OutlineInputBorder(),
+                        hintText: "Enter manager Email",
+                        fillColor: Colors.white,
+                        filled: true
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: TextField(
+                      controller: passCon,
+                      decoration: InputDecoration(
+                        enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey)),
+                        focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        border: OutlineInputBorder(),
+                        hintText: "Enter password",
+                        fillColor: Colors.white,
+                        filled: true
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  MaterialButton(
+                    onPressed: () {
+                    // signInUser();
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => AdminDashboard()));
+                    },
+                    color: Colors.grey[900],
+                    child: Text(
+                      "Login",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  )
+                ],
+              ),
+            ),]
           ),
         ),
       ),

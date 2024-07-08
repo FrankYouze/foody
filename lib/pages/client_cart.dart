@@ -17,27 +17,52 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   final DatabaseReference OrderList =
       FirebaseDatabase.instance.ref().child("OrderList");
+  final DatabaseReference UserList =
+      FirebaseDatabase.instance.ref().child("RegUsers");
   final FirebaseAuth auth = FirebaseAuth.instance;
- String Location = '';
+  String Location = '';
+  Map<dynamic, dynamic> UserMap = {};
+  String name = '';
+  String phone = '';
 
- void placeOrder()async{
+  void placeOrder() async {
+    final User? user = auth.currentUser;
+    final uid = user?.uid;
+    await OrderList.child(uid!).set(
+        {"Location": Location, 
+        "Name": name,
+        "PhoneNumber": phone,
+        "Orders": context.read<Cart>().cart.toString()});
+    showDialog(
+        context: context,
+        builder: (context) {
+          return OrderPlaced();
+        });
+  }
 
-      final User? user = auth.currentUser;
-                        final uid = user?.uid;
-    await OrderList.child(uid!).set({
-                                    "Location" : Location,
-                                    "Orders": context.read<Cart>().cart.toString()
-                          });
-                          showDialog(context: context, builder: (context){
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final User? user = auth.currentUser;
+    final uid = user?.uid;
+    UserList.child(uid!).onValue.listen((event) {
+      setState(() {
+        UserMap = Map<String, dynamic>.from(
+            event.snapshot.value as Map<dynamic, dynamic>);
 
-                            return OrderPlaced();
-                          });
- }
+        print("${UserMap['PhoneNumber']} idiii");
+
+        name = UserMap['Name'];
+        phone = UserMap['PhoneNumber'];
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final cartFoods = context.watch<Cart>().cart;
-   
+
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
@@ -72,7 +97,10 @@ class _CartPageState extends State<CartPage> {
             Container(
               child: Column(
                 children: [
-                  Text("YOUR LOCATION",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                  Text(
+                    "YOUR LOCATION",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -93,7 +121,7 @@ class _CartPageState extends State<CartPage> {
                       ),
                       MaterialButton(
                         onPressed: () {
-                            setState(() {
+                          setState(() {
                             Location = "FUNCTION HALL";
                           });
                         },
@@ -113,7 +141,7 @@ class _CartPageState extends State<CartPage> {
                     children: [
                       MaterialButton(
                         onPressed: () {
-                            setState(() {
+                          setState(() {
                             Location = "BOYS HOSTEL";
                           });
                         },
@@ -142,23 +170,25 @@ class _CartPageState extends State<CartPage> {
                   ),
                   MyButton(
                       onTap: () async {
-                      //  print(Location);
+                        //  print(Location);
                         // final User? user = auth.currentUser;
                         // final uid = user?.uid;
                         // print(context.read<Cart>().cart.toString());
-                       Location != ''?
-                        // await OrderList.child(uid!).set({
-                        //             "Location" : Location,
-                        //             "Orders": context.read<Cart>().cart.toString()
-                        //   })
-                        //   showDialog(context: context, builder: (context){
+                        Location != ''
+                            ?
+                            // await OrderList.child(uid!).set({
+                            //             "Location" : Location,
+                            //             "Orders": context.read<Cart>().cart.toString()
+                            //   })
+                            //   showDialog(context: context, builder: (context){
 
-                        //     return OrderPlaced();
-                        //   });
-                        placeOrder()
-                           :  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(content: Text('Please select a location')),
-  );
+                            //     return OrderPlaced();
+                            //   });
+                            placeOrder()
+                            : ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    content: Text('Please select a location')),
+                              );
                       },
                       text: "ORDER NOW"),
                   SizedBox(

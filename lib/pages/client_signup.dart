@@ -22,7 +22,7 @@ class SignUpPage extends StatelessWidget {
   final passcon = TextEditingController();
 
   
-Future<void> signUpWithEmailPassword(String email, String password) async {
+Future<void> signUpWithEmailPassword(String email, String password,String phone,String Name) async {
   try {
     UserCredential userCredential = await auth2.createUserWithEmailAndPassword(
       email: email,
@@ -30,6 +30,17 @@ Future<void> signUpWithEmailPassword(String email, String password) async {
     );
     // User signed up successfully
     User? user = userCredential.user;
+
+
+
+     await  usersDatabaseRef.child(
+      user!.uid
+      )
+      .set(
+        {  "Name":Name,
+          "PhoneNumber": phone,
+           }
+          );
   } catch (e) {
     print('Failed to sign up with email and password: $e');
   }
@@ -151,8 +162,13 @@ void addItemToDatabase(
                   onTap: () async{
                     
           
-                  await signUpWithEmailPassword(userEmailcon.text, passcon.text);
-                 addItemToDatabase(userPhonecon.text,userNamecon.text);
+                  await signUpWithEmailPassword(userEmailcon.text, passcon.text,userPhonecon.text,userNamecon.text);
+    //                  User? user = userCredential.user;
+    // if (user != null) {
+    //   String userId = user.uid;
+    //   print('User ID: $userId');}
+                  
+               ///  addItemToDatabase(userPhonecon.text,userNamecon.text);
  await  Navigator.push(
                       context,
                       MaterialPageRoute(

@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
    //flutter run -d chrome --web-renderer html
-      home: width <= 500 ? AuthPage() : LoginPage(),
+      home: width <= 500 ? AuthPage() : AdminLoginPage(),
     );
   }
 }

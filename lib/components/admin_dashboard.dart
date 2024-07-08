@@ -4,6 +4,7 @@ import 'package:foody/components/client_food.dart';
 import 'package:foody/components/order_list.dart';
 import 'package:foody/components/widgets/dialogbox.dart';
 import 'package:foody/pages/Pass_conPage.dart';
+import 'package:foody/pages/newSession.dart';
 
 class AdminDashboard extends StatefulWidget {
   const AdminDashboard({super.key});
@@ -32,7 +33,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: IconButton(icon: Icon(Icons.person,size: 30,),onPressed: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (context)=> PassConpage()));
+                 Navigator.push(context, MaterialPageRoute(builder: (context)=> AdminSession()));
           }),
         )
       ],

@@ -39,7 +39,7 @@ class _OrderListState extends State<OrderList> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Text("TRRRX"),
+            Text("ORDERS"),
             Container(
               child: OrderList.length == 0 ? Center(child: Text("NO ORDERS YET")): ListView.builder(
                 shrinkWrap: true,
@@ -65,6 +65,8 @@ class _OrderListState extends State<OrderList> {
               List<dynamic> orders = jsonDecode(JsonItems);
               
                print(" start ${orders.length} end");
+                    print(OrderList[current]["Name"]);
+
                 return Card(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -75,8 +77,24 @@ class _OrderListState extends State<OrderList> {
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [Text("Location"),Text(OrderList[current]["Location"])],
+                                children: [Text("Location"),Text(OrderList[current]["Location"]),],
                                             
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [Text("Phone"),Text(OrderList[current]["PhoneNumber"] == null? "sgiie" : OrderList[current]["PhoneNumber"] ),],
+                                            
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [Text("Name"),Text(OrderList[current]["Name"] == null? "" : OrderList[current]["Name"] )],
+                                       
                               ),
                             ),
                              Container(

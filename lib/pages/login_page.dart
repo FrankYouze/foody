@@ -4,8 +4,8 @@ import 'package:foody/components/admin_dashboard.dart';
 import 'package:foody/pages/admin_page.dart';
 import 'package:foody/pages/auth_page.dart';
 
-class LoginPage extends StatelessWidget {
-   LoginPage({super.key});
+class AdminLoginPage extends StatelessWidget {
+   AdminLoginPage({super.key});
 
   final emailcon = TextEditingController();
   final passCon = TextEditingController();

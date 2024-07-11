@@ -195,7 +195,7 @@ await newImage.putData(f);
                     FoodPriceCon.clear();
                     FoodNameCon.clear();
                   },
-                  color: Colors.green,
+                  color: Colors.grey[700],
                   child: const Text(
                     "DRINK",
                     style: TextStyle(color: Colors.white),

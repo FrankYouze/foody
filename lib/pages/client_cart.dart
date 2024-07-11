@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:foody/components/widgets/orderItem.dart';
 import 'package:foody/components/widgets/order_placed.dart';
 import 'package:foody/models/cartItem.dart';
 import 'package:provider/provider.dart';
+import 'package:azampay/azampay.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -24,19 +27,25 @@ class _CartPageState extends State<CartPage> {
   Map<dynamic, dynamic> UserMap = {};
   String name = '';
   String phone = '';
+  int ThisPrice = 0;
+  int TotalPrice = 0;
 
-  void placeOrder() async {
+  // get these credentials from the azampay developers account
+
+
+  void placeOrder(int price) async {
     final User? user = auth.currentUser;
     final uid = user?.uid;
     await OrderList.child(uid!).set(
         {"Location": Location, 
         "Name": name,
         "PhoneNumber": phone,
+        "TotalPrice": price,
         "Orders": context.read<Cart>().cart.toString()});
     showDialog(
         context: context,
         builder: (context) {
-          return OrderPlaced();
+          return const OrderPlaced();
         });
   }
 
@@ -51,7 +60,7 @@ class _CartPageState extends State<CartPage> {
         UserMap = Map<String, dynamic>.from(
             event.snapshot.value as Map<dynamic, dynamic>);
 
-        print("${UserMap['PhoneNumber']} idiii");
+     //   print("${UserMap['PhoneNumber']} idiii");
 
         name = UserMap['Name'];
         phone = UserMap['PhoneNumber'];
@@ -59,16 +68,29 @@ class _CartPageState extends State<CartPage> {
     });
   }
 
+
+
   @override
   Widget build(BuildContext context) {
+    var azampay = AzamPay(
+    sandbox: true, // set to false on production
+    appName: "CafeApp",
+    clientId: "91788df1-c1b3-444a-96ab-e1e513049ae9",
+    clientSecret:"CSEGSs+DDf5/+EliOOu4W127XuckZJSpSbZef8rScbTJ5GI85nJs5Jv/w6yGmhs/dfwvGrjTB4JnUL+l6a2+E9z1UaYkkkV4kcd7mUp/GWd4Dx/hqfpb37xhIiO3ij/aIbPAGF0ajIyjN8IEmABt10nVxBvhcjRTGkwhKgAm1ArWOJw1z2hEhhAENAgImWUWxT4zOC+zKJakIrL8dXPYypdgy/8znvqIqEk9EnNaYm/TBiG2QhvC6oCrXwnf4NKnGOq8QkMQ9C1zFe7iWJ2ABLMXMV80rAcnQ2qjHo5Kq53NSiNbOXHZ+ODC4gjICZ2PjtlT7qrRJ6DmGSEI8UcOMWlAaRTWiuk+FrGuvEXnpD0/1RAFLiSWhej7jZweYurfibamyUUzMTQm+YFDwiY7X/Ggryq+GwlJzoM4VR/BFePRH6WsRWKPlOzqWa9J8ZscMJmII2m99ohJfWrjYOkfFjs1xw4M7kCq2Ymn57bhbBWN9L5tSeamBZjDLSgxWOOqqBwUyPbwwOW2jReG7OwF1g9symqroRyuE9i3dnx1mvvRyJUipFzpX0R15xFvKnPPwmQcCG/JRlIU3InKgoh23LwhWRwDBCmMepndr3HC55vNEdX81Fr6Bf9tfuATLbFIINlNhxlPHIWcFMguSCW4EFibSs+F2KdAAZOl6J19nL8="
+);
+    
+ int total = 0;     
     final cartFoods = context.watch<Cart>().cart;
+ for (var item in cartFoods) {
+    total += int.parse(item.FoodPrice);
+  }
 
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.grey[900],
-        title: Text(
+        title: const Text(
           "MyCart",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
@@ -77,27 +99,40 @@ class _CartPageState extends State<CartPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            
             Container(
               height: 500,
               child: cartFoods.length == 0
-                  ? Center(child: Text("NO FOODS IN CART"))
+                  ? const Center(child: Text("NO FOODS IN CART"))
                   : ListView.builder(
+                   
                       itemCount: cartFoods.length,
                       itemBuilder: (context, i) {
+                        ThisPrice = int.parse(cartFoods[i].FoodPrice);
+                        print("${ThisPrice} price");
                         return OrderItem(
                             foodName: cartFoods[i].FoodName,
                             price: cartFoods[i].FoodPrice,
+                          
                             ClientRemov: () {
                               context.read<Cart>().removeFromCart(cartFoods[i]);
                             },
                             userGroup: "user");
                       },
-                    ),
+                    ),   
+            ),
+             Container(
+              
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'Total Price: $total',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
             Container(
               child: Column(
                 children: [
-                  Text(
+                  const Text(
                     "YOUR LOCATION",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
@@ -111,12 +146,12 @@ class _CartPageState extends State<CartPage> {
                           });
                         },
                         color: Colors.grey,
-                        child: Text(
+                        child: const Text(
                           "VIMBWETA",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 30,
                       ),
                       MaterialButton(
@@ -126,14 +161,14 @@ class _CartPageState extends State<CartPage> {
                           });
                         },
                         color: Colors.grey,
-                        child: Text(
+                        child: const Text(
                           "FUNCTION HALL",
                           style: TextStyle(color: Colors.white),
                         ),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
@@ -146,12 +181,12 @@ class _CartPageState extends State<CartPage> {
                           });
                         },
                         color: Colors.grey,
-                        child: Text(
+                        child: const Text(
                           "BOYS HOSTEL",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 30,
                       ),
                       MaterialButton(
@@ -161,7 +196,7 @@ class _CartPageState extends State<CartPage> {
                           });
                         },
                         color: Colors.grey,
-                        child: Text(
+                        child: const Text(
                           "GIRLS HOSTEL",
                           style: TextStyle(color: Colors.white),
                         ),
@@ -169,7 +204,18 @@ class _CartPageState extends State<CartPage> {
                     ],
                   ),
                   MyButton(
+
+                    
                       onTap: () async {
+                        if (Location.isNotEmpty) {
+          
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Please select a location'),
+            ),
+          );
+        }
                         //  print(Location);
                         // final User? user = auth.currentUser;
                         // final uid = user?.uid;
@@ -184,20 +230,46 @@ class _CartPageState extends State<CartPage> {
 
                             //     return OrderPlaced();
                             //   });
-                            placeOrder()
+                            placeOrder(total)
                             : ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
+                                const SnackBar(
                                     content: Text('Please select a location')),
                               );
+
+
+
+                              //START HERE
+
+
+    
+var mobileResponse = await azampay.mobileCheckout(
+    merchantMobileNumber: "0744619568",
+    amount: "$total",
+    currency: "TZS", // ["TZS"]
+    provider: "Mpesa", // ["Airtel" "Tigo" "Halopesa" "Azampesa"]
+    externalId: "123123",
+    additionalProperties: {}
+    );
+    
+print(json.decode(mobileResponse.body));
+
+// successful mobile checkout response (you can now see a push USSD on your phone)
+
+
+
+
+
+                              //END HERE
                       },
-                      text: "ORDER NOW"),
-                  SizedBox(
+                      text: 'Pay Now'
+                      ),
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
                     height: 50,
                     color: Colors.red,
-                    child: Center(
+                    child: const Center(
                         child: Text(
                       "PLEASE DISPOSE WASTE IN APROPIATE PLACE ",
                       style: TextStyle(
@@ -213,3 +285,4 @@ class _CartPageState extends State<CartPage> {
     );
   }
 }
+ 

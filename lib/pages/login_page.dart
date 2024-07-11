@@ -28,7 +28,7 @@ class AdminLoginPage extends StatelessWidget {
                 height: 1000,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/old/123.jpg"),
+                    image: AssetImage("assets/img/soda.jpg"),
                     fit: BoxFit.cover,)
               )),
               Center(

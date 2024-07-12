@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class OrderPlaced extends StatelessWidget {
-  const OrderPlaced({super.key});
+  final String confirm;
+  const OrderPlaced({super.key, required this.confirm});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +11,7 @@ class OrderPlaced extends StatelessWidget {
         color: Colors.white,
         height: 50,
         width: 300,
-        child: Center(child: Text("ORDER PLACED SUCCESSFULY",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),),
+        child: Center(child: Text(confirm,style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),),
       ),
     );
   }

@@ -29,7 +29,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("ADMIN APP",style: TextStyle(color: Colors.white,),textAlign: TextAlign.center,),backgroundColor: Colors.grey[800],actions: [
+      appBar: AppBar(title: Text("CafeApp/Manager",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),backgroundColor: Colors.grey[800],actions: [
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: IconButton(icon: Icon(Icons.person,size: 30,),onPressed: (){

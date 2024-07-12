@@ -15,6 +15,10 @@ class _OrderListState extends State<OrderList> {
   final DatabaseReference orderdListDB =
       FirebaseDatabase.instance.ref().child("OrderList");
   Map<dynamic, dynamic> OrderList = {};
+
+   final DatabaseReference RegUsersDB =
+      FirebaseDatabase.instance.ref().child("RegUsers");
+  Map<dynamic, dynamic> RegUsers = {};
   //List <dynamic> Items = [];
 
 
@@ -30,6 +34,17 @@ class _OrderListState extends State<OrderList> {
         print("${OrderList.keys} keys");
       });
     });
+
+    
+    RegUsersDB.onValue.listen((event) {
+      setState(() {
+        // print("hellw world");
+        RegUsers = Map<String, dynamic>.from(
+            event.snapshot.value as Map<dynamic, dynamic>);
+        print("${RegUsers.keys} keys");
+      });
+    });
+
   }
 
   @override
@@ -39,14 +54,14 @@ class _OrderListState extends State<OrderList> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Text("ORDERS"),
+            const Text("ORDERS"),
             Container(
-              child: OrderList.length == 0 ? Center(child: Text("NO ORDERS YET")): ListView.builder(
+              child: OrderList.length == 0 ? const Center(child: Text("NO ORDERS YET")): ListView.builder(
                 shrinkWrap: true,
                 itemCount: OrderList.length,
                 itemBuilder: (context,ind){
               dynamic current = OrderList.keys.elementAt(ind);
-              //print(OrderList[current]["Orders"]);
+              print(OrderList[current]["Orders"]);
               String Items = OrderList[current]["Orders"];
               String JsonItems = Items
                   .replaceAllMapped(RegExp(r'(\w+):'), (match) {
@@ -64,8 +79,8 @@ class _OrderListState extends State<OrderList> {
                    
               List<dynamic> orders = jsonDecode(JsonItems);
               
-               print(" start ${orders.length} end");
-                    print(OrderList[current]["Name"]);
+              //  print(" start ${orders.length} end");
+              //       print(OrderList[current]["Name"]);
 
                 return Card(
                     child: Padding(
@@ -77,7 +92,7 @@ class _OrderListState extends State<OrderList> {
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [Text("Location"),Text(OrderList[current]["Location"]),],
+                                children: [const Text("Location"),Text(OrderList[current]["Location"]),],
                                             
                               ),
                             ),
@@ -85,16 +100,26 @@ class _OrderListState extends State<OrderList> {
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [Text("Phone"),Text(OrderList[current]["PhoneNumber"] == null? "sgiie" : OrderList[current]["PhoneNumber"] ),],
+                                // ignore: prefer_if_null_operators
+                                children: [const Text("Phone"),Text(OrderList[current]["PhoneNumber"] == null? "sgiie" : OrderList[current]["PhoneNumber"] ),],
                                             
                               ),
                             ),
+                            
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [Text("Name"),Text(OrderList[current]["Name"] == null? "" : OrderList[current]["Name"] )],
+                                children: [const Text("Name"),Text(OrderList[current]["Name"] ?? "" )],
+
                                        
+                              ),
+                            ),
+                              Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [const Text("Total price"),Text(OrderList[current]["TotalPrice"].toString() ?? "" )],
                               ),
                             ),
                              Container(

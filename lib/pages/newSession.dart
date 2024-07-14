@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:foody/models/AdminAuth.dart';
+import 'package:provider/provider.dart';
 
 class AdminSession extends StatefulWidget {
-  const AdminSession({super.key});
+   AdminSession({super.key});
 
+ 
   @override
   State<AdminSession> createState() => _AdminSessionState();
 }
 
 class _AdminSessionState extends State<AdminSession> {
+
+ final oldPassCon = TextEditingController();
+  final newPassCon = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +38,7 @@ class _AdminSessionState extends State<AdminSession> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: TextField(
-                    controller:TextEditingController(),
+                    controller:oldPassCon,
                     decoration: InputDecoration(
                       enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.grey)),
@@ -48,7 +55,7 @@ class _AdminSessionState extends State<AdminSession> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: TextField(
-                    controller: TextEditingController(),
+                    controller: newPassCon,
                     decoration: InputDecoration(
                       enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.grey)),
@@ -64,8 +71,21 @@ class _AdminSessionState extends State<AdminSession> {
                 ),
                 MaterialButton(
                   onPressed: () {
-                  // signInUser();
-                     //FirebaseAuth.instance.signOut();
+          
+   final currentPassword = oldPassCon.text;
+                final newPassword = newPassCon.text;
+                final auth = context.read<AdminAuth>();
+
+                if (auth.isAuthenticated && auth.pass == currentPassword) {
+                  auth.changePassword(newPassword);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Password changed successfully!')),
+                  );
+
+
+
+
+                }
                   },
                   color: Colors.grey,
                   child: Text(
@@ -78,7 +98,7 @@ class _AdminSessionState extends State<AdminSession> {
                 ),
                 MaterialButton(
                   onPressed: () {
-   
+    context.read<AdminAuth>().logout();
                   },
                   color: Colors.grey,
                   child: Text(

@@ -134,7 +134,7 @@ class _OrderListState extends State<OrderList> {
                         child: ListTile(
                           leading: Image.network(orders[index]['image']),
                           title: Text('Name: ${orders[index]['name']}'),
-                          trailing: Text('Name: ${orders[index]['price']}'),
+                          trailing: Text('Price: ${orders[index]['price']}'),
                           ),
                       );
                                 },

@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foody/components/admin_dashboard.dart';
+import 'package:foody/models/AdminAuth.dart';
 import 'package:foody/pages/admin_page.dart';
 import 'package:foody/pages/auth_page.dart';
+import 'package:provider/provider.dart';
 
 class AdminLoginPage extends StatelessWidget {
    AdminLoginPage({super.key});
@@ -85,9 +87,26 @@ class AdminLoginPage extends StatelessWidget {
                   ),
                   MaterialButton(
                     onPressed: () {
-                    // signInUser();
+
+
+
+                final email = emailcon.text;
+                final Password = passCon.text;
+                 context.read<AdminAuth>().login(email, Password);
+final auth = context.read<AdminAuth>().isAuthenticated;
+
+
+
+if(auth) {
+
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => AdminDashboard()));
+                          MaterialPageRoute(builder: (context) => AdminDashboard()));}
+
+                          else{
+                                   ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Wrong password,Please try again!')),
+                  );
+                          }
                     },
                     color: Colors.grey[900],
                     child: Text(

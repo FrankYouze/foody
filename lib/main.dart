@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:foody/firebase_options.dart';
+import 'package:foody/models/AdminAuth.dart';
 import 'package:foody/models/cartItem.dart';
 import 'package:foody/pages/auth_page.dart';
 import 'package:foody/pages/home_page.dart';
@@ -8,19 +9,22 @@ import 'package:foody/pages/login_page.dart';
 import 'package:foody/pages/login_page1.dart';
 import 'package:provider/provider.dart';
 
-void main()async {
-     WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
-);
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 // runApp(const MyApp());
 
- runApp(
-    ChangeNotifierProvider(
-      create: (context) => Cart(),
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Cart()),
+        ChangeNotifierProvider(create: (context) => AdminAuth()),
+      ],
       child: const MyApp(),
-      ),
-    );
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -29,11 +33,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-      double width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-   //flutter run -d chrome --web-renderer html
+      //flutter run -d chrome --web-renderer html
       home: width <= 500 ? AuthPage() : AdminLoginPage(),
     );
   }

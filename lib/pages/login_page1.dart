@@ -81,8 +81,8 @@ try{
                 ),
                 MyButton(
                   text: "Signin",
-                  onTap: () {
-                      signInUser();
+                  onTap: () async {
+                     signInUser();
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(

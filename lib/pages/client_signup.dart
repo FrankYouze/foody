@@ -143,7 +143,7 @@ void addItemToDatabase(
                 ),
                 MyTextField(
                   myText: "enter phone number",
-                  obscu: true,
+                  obscu: false,
                   controller: userPhonecon,
                 ),
                 const SizedBox(

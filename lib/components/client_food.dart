@@ -77,7 +77,7 @@ class _ClientFoodState extends State<ClientFood> {
               itemCount: availableFoods.length,
               itemBuilder: (context, index) {
                 current = availableFoods.keys.elementAt(index);
-                print(availableFoods[current]['FoodImage']);
+                //print(availableFoods[current]['FoodImage']);
 
                 return FoodItem(
                   ImageUrl: availableFoods[current]['FoodImage'],
@@ -89,7 +89,7 @@ class _ClientFoodState extends State<ClientFood> {
 
                  context.read<Cart>()
                           .addToCart(foodList[index]);
-                          print(foodList[index].FoodImage);
+                       //   print(foodList[index].FoodImage);
 
                   },
                   AdminRem: () async {
